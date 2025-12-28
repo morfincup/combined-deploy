@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <base href="/premium/">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Premium + Test Platform</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <script>window.API_PREFIX = '/premium-api';</script>
+</head>
+<body>
+  <header class="container header">
+    <div>
+      <h1>Premium + Test Platform</h1>
+      <p class="muted">Foydalanuvchi: registratsiya/login, premium kontent, test (20 ta random savol). Admin: foydalanuvchilar va premium boshqaruvi.</p>
+    </div>
+    <nav class="nav">
+      <a href="/" class="active">User</a>
+      <a href="/admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="authSection" class="card">
+      <div class="grid2">
+        <div>
+          <h2>Login</h2>
+          <label>Email</label>
+          <input id="loginEmail" type="email" placeholder="email@example.com" />
+          <label>Password</label>
+          <input id="loginPassword" type="password" placeholder="******" />
+          <button id="loginBtn">Kirish</button>
+          <p id="loginMsg" class="msg"></p>
+        </div>
+
+        <div>
+          <h2>Registratsiya</h2>
+          <label>Ism</label>
+          <input id="regName" type="text" placeholder="Ismingiz" />
+          <label>Email</label>
+          <input id="regEmail" type="email" placeholder="email@example.com" />
+          <label>Password (min 6)</label>
+          <input id="regPassword" type="password" placeholder="******" />
+          <button id="registerBtn">Ro‘yxatdan o‘tish</button>
+          <p id="registerMsg" class="msg"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="appSection" class="card hidden">
+      <div class="row space-between">
+        <div>
+          <h2>Dashboard</h2>
+          <p class="muted" id="userInfo"></p>
+        </div>
+        <div class="row">
+          <button id="refreshBtn" class="secondary">Yangilash</button>
+          <button id="logoutBtn" class="danger">Chiqish</button>
+        </div>
+      </div>
+
+      <hr/>
+
+      <div id="premiumBox" class="premium hidden">
+        <h3>Premium kontent</h3>
+        <p>Tabriklaymiz. Siz premium foydalanuvchisiz. Bu bo‘lim faqat premium bo‘lsa ko‘rinadi.</p>
+        <ul>
+          <li>Maxsus video darslar (demo matn)</li>
+          <li>Premium test paketlari</li>
+          <li>Yopiq materiallar</li>
+        </ul>
+      </div>
+
+      <div id="nonPremiumBox" class="premium hidden">
+        <h3>Premium yoqilmagan</h3>
+        <p>Premium kontentni ko‘rish uchun admin premiumni yoqishi kerak.</p>
+      </div>
+
+      <hr/>
+
+      <h3>Test tizimi</h3>
+      <div class="row">
+        <select id="topicSelect"></select>
+        <button id="startQuizBtn">Testni boshlash (20 ta random)</button>
+        <button id="historyBtn" class="secondary">So‘nggi urinishlar</button>
+      </div>
+
+      <div id="quizArea" class="quiz hidden"></div>
+      <div id="resultArea" class="hidden"></div>
+      <div id="historyArea" class="hidden"></div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <span class="muted">Backend: Node.js (Express) + SQLite. Frontend: HTML/CSS/JS.</span>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

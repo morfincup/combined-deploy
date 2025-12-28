@@ -1,0 +1,56 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: shef
+      POSTGRES_USER: shef
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-shefpass}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  shef-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.shef-api
+    environment:
+      PORT: 8080
+      DATABASE_URL: postgres://shef:${POSTGRES_PASSWORD:-shefpass}@postgres:5432/shef
+      # Production domeningizni qo'ying (CORS uchun)
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost}
+      # kerak bo'lsa JWT_SECRET va boshqalar ham shu yerga qo'shiladi
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+  premium-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.premium-backend
+    environment:
+      PORT: 3000
+      DB_PATH: /data/data.sqlite
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@example.com}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin12345}
+      JWT_SECRET: ${JWT_SECRET:-change_me}
+    volumes:
+      - premium_data:/data
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+      args:
+        VITE_API_PREFIX: /shef-api
+    ports:
+      - "80:80"
+    depends_on:
+      - shef-api
+      - premium-backend
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  premium_data:

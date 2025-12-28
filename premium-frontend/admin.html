@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <base href="/premium/">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <script>window.API_PREFIX = '/premium-api';</script>
+</head>
+<body>
+  <header class="container header">
+    <div>
+      <h1>Admin Panel</h1>
+      <p class="muted">Admin login va foydalanuvchilarning premium holatini boshqarish.</p>
+    </div>
+    <nav class="nav">
+      <a href="/">User</a>
+      <a href="/admin.html" class="active">Admin</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="adminAuth" class="card">
+      <h2>Admin Login</h2>
+      <label>Username</label>
+      <input id="adminUsername" type="text" placeholder="admin" />
+      <label>Password</label>
+      <input id="adminPassword" type="password" placeholder="admin123" />
+      <button id="adminLoginBtn">Kirish</button>
+      <p id="adminMsg" class="msg"></p>
+    </section>
+
+    <section id="adminApp" class="card hidden">
+      <div class="row space-between">
+        <h2>Foydalanuvchilar</h2>
+        <div class="row">
+          <button id="adminRefreshBtn" class="secondary">Yangilash</button>
+          <button id="adminLogoutBtn" class="danger">Chiqish</button>
+        </div>
+      </div>
+
+      <div id="usersTableWrap"></div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <span class="muted">Default admin: admin / admin123 (backend birinchi ishga tushganda seed bo‘ladi).</span>
+  </footer>
+
+  <script src="/admin.js"></script>
+</body>
+</html>
